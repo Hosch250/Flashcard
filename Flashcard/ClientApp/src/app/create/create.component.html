@@ -2,15 +2,15 @@
     <mat-card>
         <mat-card-content class="card-container">
             <mat-form-field>
-                <input matInput placeholder="Deck Title" [value]="flashcardDeck.title" (input)="flashcardDeck.title = $event.target.value" />
+                <input matInput placeholder="Deck Title" [value]="flashcardDeck?.title" (input)="flashcardDeck.title = $event.target.value" />
             </mat-form-field>
             
             <div fxLayout="row" fxLayoutGap="20px">
                 <div fxFlex>
                     <mat-form-field>
                         <mat-label>Tags</mat-label>
-                        <mat-select multiple [value]="allTags" (value)="flashcardDeck.tags">
-                            <mat-option *ngFor="let tag of flashcardDeck.tags" value="{{tag}}">{{tag}}</mat-option>
+                        <mat-select multiple [value]="allTags" (value)="flashcardDeck?.tags">
+                            <mat-option *ngFor="let tag of flashcardDeck?.tags" value="{{tag}}">{{tag}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -28,7 +28,7 @@
                             <div fxLayout="column">
                                 <div fxFlex>
                                     <mat-button-toggle-group vertical value="0" (change)="setSelectedCard($event)">
-                                        <mat-button-toggle *ngFor="let card of flashcardDeck.cards" value="{{card.id}}" [checked]="card.id === selectedCard.id">
+                                        <mat-button-toggle *ngFor="let card of flashcardDeck?.cards" value="{{card.id}}" [checked]="card.id === selectedCard?.id">
                                             {{card.label}}
                                         </mat-button-toggle>
                                     </mat-button-toggle-group>
@@ -44,16 +44,16 @@
                 </div>
                 <div fxFlex>
                     <mat-card>
-                        <mat-card-title>{{flashcardDeck.title}}</mat-card-title>
+                        <mat-card-title>{{flashcardDeck?.title}}</mat-card-title>
                         <mat-card-content>
                             <mat-form-field>
-                                <input matInput placeholder="Card Label" [value]="selectedCard.label" (input)="selectedCard.label = $event.target.value" />
+                                <input matInput placeholder="Card Label" [value]="selectedCard?.label" (input)="selectedCard.label = $event.target.value" />
                             </mat-form-field>
                             <mat-form-field>
-                                <textarea matInput placeholder="Card Front" rows="4" [value]="selectedCard.front" (input)="selectedCard.front = $event.target.value"></textarea>
+                                <textarea matInput placeholder="Card Front" rows="4" [value]="selectedCard?.front" (input)="selectedCard.front = $event.target.value"></textarea>
                             </mat-form-field>
                             <mat-form-field>
-                                <textarea matInput placeholder="Card Back" rows="4" [value]="selectedCard.back" (input)="selectedCard.back = $event.target.value"></textarea>
+                                <textarea matInput placeholder="Card Back" rows="4" [value]="selectedCard?.back" (input)="selectedCard.back = $event.target.value"></textarea>
                             </mat-form-field>
                             <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()">
                                     <mat-icon>delete_outline</mat-icon> Delete Card
