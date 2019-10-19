@@ -46,8 +46,11 @@ export class CreateComponent implements OnInit {
     }
     
     constructor(private flashcardDeckService: FlashcardDeckService, private dialog: MatDialog) { 
-        this.flashcardDeck = this.flashcardDeckService.get(1);
-        this.selectedCard = this.flashcardDeck.cards[0];
+        this.flashcardDeckService.get(8).subscribe(data => {
+            console.log(data);
+            this.flashcardDeck = data;
+            this.selectedCard = this.flashcardDeck.cards[0];
+        });
     }
 
     private setSelectedCard(ev: any) {
@@ -72,16 +75,7 @@ export class CreateComponent implements OnInit {
     }
     
     private saveDeck() {
-        let response = this.flashcardDeckService.save(this.flashcardDeck);
-        console.log(response);
-        response.subscribe(data => {
-            console.log(data);
-        });
-        //response.toPromise();
-        // response.pipe(map(deck => {
-        //     console.log(deck);
-        //     return deck;
-        // }));
+        this.flashcardDeckService.save(this.flashcardDeck).subscribe();
     }
 
     ngOnInit() {

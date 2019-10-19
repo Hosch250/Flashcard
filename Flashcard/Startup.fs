@@ -38,7 +38,7 @@ type Startup private () =
         app.UseEndpoints(fun endpoints ->
             endpoints.MapControllerRoute(
                 name = "default",
-                pattern = "{controller}/{action=Index}/{id?}") |> ignore
+                pattern = "{controller}/{action}/{id?}") |> ignore
         ) |> ignore
 
         app.UseSpa(fun spa ->
