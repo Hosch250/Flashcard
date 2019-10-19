@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FlashcardDeckService, FlashcardDeck, Flashcard } from '../shared/services/flashcardDeck.service';
-import { find, remove } from 'lodash';
+import { find, remove, indexOf } from 'lodash';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'fcd-create',
@@ -15,7 +13,7 @@ export class CreateComponent implements OnInit {
 
     private _flashcardDeck: FlashcardDeck;
     private get flashcardDeck() {
-        return    this._flashcardDeck;
+        return this._flashcardDeck;
     }
     private set flashcardDeck(value) {
         this._flashcardDeck = value;
@@ -24,7 +22,7 @@ export class CreateComponent implements OnInit {
     
     private _selectedCard: Flashcard;
     private get selectedCard() {
-        return    this._selectedCard;
+        return this._selectedCard;
     }
     private set selectedCard(value) {
         this._selectedCard = value;
@@ -32,7 +30,7 @@ export class CreateComponent implements OnInit {
     
     private _allTags: string[];
     private get allTags() {
-        return    this._allTags;
+        return this._allTags;
     }
 
     private addTagDialog(): void {
@@ -69,8 +67,17 @@ export class CreateComponent implements OnInit {
     }
 
     private deleteCard() {
-        this.flashcardDeck.cards =
-            remove(this.flashcardDeck.cards, card => card.id !== this.selectedCard.id);
+        let selectedIndex = indexOf(this.flashcardDeck.cards, this.selectedCard);
+        remove(this.flashcardDeck.cards, card => card.id === this.selectedCard.id);
+
+        if (this.flashcardDeck.cards.length === 0) {
+            this.selectedCard = null;
+        } else {
+            let newIndex = selectedIndex === 0
+                ? 0
+                : selectedIndex - 1;
+            this.selectedCard = this.flashcardDeck.cards[newIndex];
+        }
     }
     
     private saveDeck() {

@@ -28,7 +28,7 @@
                             <div fxLayout="column">
                                 <div fxFlex>
                                     <mat-button-toggle-group vertical value="0" (change)="setSelectedCard($event)">
-                                        <mat-button-toggle *ngFor="let card of flashcardDeck.cards" value="{{card.id}}">
+                                        <mat-button-toggle *ngFor="let card of flashcardDeck.cards" value="{{card.id}}" [checked]="card.id === selectedCard.id">
                                             {{card.label}}
                                         </mat-button-toggle>
                                     </mat-button-toggle-group>
