@@ -46,8 +46,7 @@ export class CreateComponent implements OnInit {
     }
     
     constructor(private flashcardDeckService: FlashcardDeckService, private dialog: MatDialog) { 
-        this.flashcardDeckService.get(8).subscribe(data => {
-            console.log(data);
+        this.flashcardDeckService.get(0).subscribe(data => {
             this.flashcardDeck = data;
             this.selectedCard = this.flashcardDeck.cards[0];
         });
