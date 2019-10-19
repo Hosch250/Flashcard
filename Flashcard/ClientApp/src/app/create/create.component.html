@@ -42,18 +42,18 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
-                <div fxFlex>
+                <div fxFlex *ngIf="selectedCard">
                     <mat-card>
                         <mat-card-title>{{flashcardDeck?.title}}</mat-card-title>
                         <mat-card-content>
                             <mat-form-field>
-                                <input matInput placeholder="Card Label" [value]="selectedCard?.label" (input)="selectedCard.label = $event.target.value" />
+                                <input matInput placeholder="Card Label" [value]="selectedCard.label" (input)="selectedCard.label = $event.target.value" />
                             </mat-form-field>
                             <mat-form-field>
-                                <textarea matInput placeholder="Card Front" rows="4" [value]="selectedCard?.front" (input)="selectedCard.front = $event.target.value"></textarea>
+                                <textarea matInput placeholder="Card Front" rows="4" [value]="selectedCard.front" (input)="selectedCard.front = $event.target.value"></textarea>
                             </mat-form-field>
                             <mat-form-field>
-                                <textarea matInput placeholder="Card Back" rows="4" [value]="selectedCard?.back" (input)="selectedCard.back = $event.target.value"></textarea>
+                                <textarea matInput placeholder="Card Back" rows="4" [value]="selectedCard.back" (input)="selectedCard.back = $event.target.value"></textarea>
                             </mat-form-field>
                             <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()">
                                     <mat-icon>delete_outline</mat-icon> Delete Card

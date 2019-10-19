@@ -28,7 +28,16 @@ export class FlashcardDeckService {
     };
     
     constructor(private http: HttpClient) { }
-    
+
+    getNew(): FlashcardDeck {
+        return {
+            id: 0,
+            title: '',
+            cards: [],
+            tags: []
+        }
+    }
+
     get(id: number): Observable<FlashcardDeck> {
         return this.http.get<FlashcardDeck>(`/FlashcardDeck/getDeck/${id}`);
     }
