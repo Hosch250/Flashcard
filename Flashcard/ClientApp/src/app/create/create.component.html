@@ -1,0 +1,72 @@
+<section>
+    <mat-card>
+        <mat-card-content class="card-container">
+            <mat-form-field>
+                <input matInput placeholder="Deck Title" [value]="flashcardDeck.title" (input)="flashcardDeck.title = $event.target.value" />
+            </mat-form-field>
+            
+            <div fxLayout="row" fxLayoutGap="20px">
+                <div fxFlex>
+                    <mat-form-field>
+                        <mat-label>Tags</mat-label>
+                        <mat-select multiple [value]="allTags" (value)="flashcardDeck.tags">
+                            <mat-option *ngFor="let tag of flashcardDeck.tags" value="{{tag}}">{{tag}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="130px">
+                    <button id="add-tag" mat-raised-button color="primary" (click)="addTagDialog()">
+                        <mat-icon>label</mat-icon> Create Tag
+                    </button>
+                </div>
+            </div>
+            
+            <div fxLayout="row" fxLayoutGap="20px">
+                <div fxFlex="250px">
+                    <mat-card class="flashcard-list">
+                        <mat-card-content>
+                            <div fxLayout="column">
+                                <div fxFlex>
+                                    <mat-button-toggle-group vertical value="0" (change)="setSelectedCard($event)">
+                                        <mat-button-toggle *ngFor="let card of flashcardDeck.cards" value="{{card.id}}">
+                                            {{card.label}}
+                                        </mat-button-toggle>
+                                    </mat-button-toggle-group>
+                                </div>
+                                <div fxFlex="36px">
+                                    <button mat-raised-button color="primary" id="add-card" (click)="addCard()">
+                                        <mat-icon>add</mat-icon> Create Card
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div fxFlex>
+                    <mat-card>
+                        <mat-card-title>{{flashcardDeck.title}}</mat-card-title>
+                        <mat-card-content>
+                            <mat-form-field>
+                                <input matInput placeholder="Card Label" [value]="selectedCard.label" (input)="selectedCard.label = $event.target.value" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <textarea matInput placeholder="Card Front" rows="4" [value]="selectedCard.front" (input)="selectedCard.front = $event.target.value"></textarea>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <textarea matInput placeholder="Card Back" rows="4" [value]="selectedCard.back" (input)="selectedCard.back = $event.target.value"></textarea>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()">
+                                    <mat-icon>delete_outline</mat-icon> Delete Card
+                            </button>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="saveDeck()">
+                <mat-icon>save_alt</mat-icon> Save
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</section>

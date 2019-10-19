@@ -10,6 +10,6 @@ type FlashcardDeckController (logger : ILogger<FlashcardDeckController>) =
     inherit ControllerBase()
 
     [<HttpPost>]
-    member __.Post(flashcardDeck : FlashcardDeck) =
+    member __.Post([<FromBody>] flashcardDeck : FlashcardDeck) =
         logger.LogInformation(flashcardDeck.Title) |> ignore
         ()

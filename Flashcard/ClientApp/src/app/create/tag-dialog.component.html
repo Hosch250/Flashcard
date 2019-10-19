@@ -1,0 +1,10 @@
+
+<h1 mat-dialog-title>Create Tag</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Tag Name" #tag />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="tag.value" color="primary">Create</button>
+</div>
