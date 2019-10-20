@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FlashcardDeckService, FlashcardDeck, Flashcard } from '../shared/services/flashcardDeck.service';
 import { find, remove, indexOf } from 'lodash';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'fcd-create',
@@ -43,8 +44,17 @@ export class CreateComponent implements OnInit {
         });
     }
     
-    constructor(private flashcardDeckService: FlashcardDeckService, private dialog: MatDialog) { 
-        this.flashcardDeck = this.flashcardDeckService.getNew();
+    constructor(private flashcardDeckService: FlashcardDeckService, private dialog: MatDialog, private route: ActivatedRoute) {
+        if (!route.snapshot.paramMap.has('id')) {
+            this.flashcardDeck = this.flashcardDeckService.getNew();
+        } else {
+            this.flashcardDeckService
+                .get(parseInt(route.snapshot.paramMap.get('id')))
+                .subscribe(data => {
+                    this.flashcardDeck = data;
+                    this.selectedCard = this.flashcardDeck.cards[0];
+                });
+        }
     }
 
     private setSelectedCard(ev: any) {

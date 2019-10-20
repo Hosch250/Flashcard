@@ -10,6 +10,7 @@ import { MatGridListModule } from '@angular/material/grid-list'
 import { MatSelectModule } from '@angular/material/select';
 import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     declarations: [HomeComponent, DeckFinderComponent],
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
         MatGridListModule,
         MatSelectModule,
         HttpClientModule,
+        FlexLayoutModule,
         RouterModule.forChild([
             { path: '', component: HomeComponent }
         ])

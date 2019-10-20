@@ -1,3 +1,31 @@
-mat-grid-tile {
-  margin: 20px;
+section {
+  margin: 10px;
+  
+  mat-grid-tile {
+    padding: 10px;
+
+    mat-card {
+      height: 150px;
+      width: 250px;
+      margin: 10px;
+      padding: 10px;
+      background-color: linen;
+
+      #edit-deck {
+        float: right !important;
+      }
+
+      .view-deck-container {
+        text-align: center;
+        padding-top: 40px;
+      }
+
+      .view-deck {
+        font-weight: bold;
+        font-size: 200%;
+        color: sienna;
+        text-decoration: underline;
+      }
+    }
+  }
 }
