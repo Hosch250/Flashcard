@@ -3,43 +3,56 @@ section {
     text-align: center;
   }
 
-  .flip-container {
-    perspective: 1000px;
-    margin: auto;
+  mat-card-content {
+    .flip-container {
+      perspective: 1000px;
+      margin: auto;
+      margin-bottom: 0;
 
-    .flipper {
-      transition: 0.6s;
-      transform-style: preserve-3d;
-      position: relative;
+      .flipper {
+        transition: 0.6s;
+        transform-style: preserve-3d;
+        position: relative;
 
-      .front, .back {
-        backface-visibility: hidden;
-        position: absolute;
-        top: 0;
-        left: 0;
-        text-align: center;
-        vertical-align: middle;
-        padding: 10px;
-        background-color: whitesmoke;
+        .front, .back {
+          backface-visibility: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
+          text-align: center;
+          vertical-align: middle;
+          padding: 10px;
+          background-color: whitesmoke;
+        }
+
+        .front {
+          z-index: 2;
+          transform: rotateY(0deg);
+        }
+
+        .back {
+          transform: rotateY(180deg);
+        }
       }
+    }
 
-      .front {
-        z-index: 2;
-        transform: rotateY(0deg);
-      }
+    .flip-container:hover .flipper, .flip-container.hover .flipper {
+      transform: rotateY(180deg);
+    }
 
-      .back {
-        transform: rotateY(180deg);
-      }
+    .flip-container, .front, .back {
+      width: 320px;
+      height: 200px;
     }
   }
 
-  .flip-container:hover .flipper, .flip-container.hover .flipper {
-    transform: rotateY(180deg);
-  }
-
-  .flip-container, .front, .back {
+  mat-card-actions {
     width: 320px;
-    height: 200px;
+    margin: auto;
+    padding-top: 0;
+
+    .nav-next {
+      float: right !important;
+    }
   }
 }

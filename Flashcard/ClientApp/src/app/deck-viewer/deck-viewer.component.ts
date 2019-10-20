@@ -29,10 +29,25 @@ export class DeckViewerComponent implements OnInit {
         this.flashcardDeckService
             .get(parseInt(route.snapshot.paramMap.get('id')))
             .subscribe(data => {
-                console.log(data);
                 this.flashcardDeck = data;
                 this.selectedCard = this.flashcardDeck.cards[0];
             });
+    }
+
+    private previousCard() {
+        if (this.selectedCard.id === 0) {
+            return;
+        }
+
+        this.selectedCard = this.flashcardDeck.cards[this.selectedCard.id - 1];
+    }
+
+    private nextCard() {
+        if (this.selectedCard.id === this.flashcardDeck.cards.length - 1) {
+            return;
+        }
+
+        this.selectedCard = this.flashcardDeck.cards[this.selectedCard.id + 1];
     }
 
     ngOnInit() {

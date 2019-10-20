@@ -68,13 +68,11 @@ type FlashcardDeckController (configuration : IConfiguration) =
         let database = client.GetDatabase("Flashcards")
         let collection = database.GetCollection<FlashcardDeck>("Decks")
         
-        let data = collection
-                        .Find(Builders<FlashcardDeck>.Filter.Empty)
-                        .Project(Builders<FlashcardDeck>.Projection.Expression(fun s -> s.Tags))
-                        .ToList()
-                    |> Seq.collect (fun s -> s)
-                    |> Seq.distinct
-                    |> Seq.sortBy (fun s -> s)
-                    |> Seq.toArray
-
-        data
+        collection
+            .Find(Builders<FlashcardDeck>.Filter.Empty)
+            .Project(Builders<FlashcardDeck>.Projection.Expression(fun s -> s.Tags))
+            .ToList()
+        |> Seq.collect (fun s -> s)
+        |> Seq.distinct
+        |> Seq.sortBy (fun s -> s)
+        |> Seq.toArray
