@@ -42,8 +42,10 @@ export class FlashcardDeckService {
         return this.http.get<FlashcardDeck>(`/FlashcardDeck/getDeck/${id}`);
     }
 
-    getAll(): Observable<FlashcardDeck[]> {
-        return this.http.get<FlashcardDeck[]>(`/FlashcardDeck/getAllDecks`);
+    getAll(category?: string): Observable<FlashcardDeck[]> {
+        return category === undefined
+            ? this.http.get<FlashcardDeck[]>(`/FlashcardDeck/getAllDecks`)
+            : this.http.get<FlashcardDeck[]>(`/FlashcardDeck/getAllDecks?category=${category}`);
     }
     
     save(flashcardDeck: FlashcardDeck) {

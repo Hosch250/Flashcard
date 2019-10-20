@@ -1,8 +1,23 @@
-<mat-card *ngFor="let deck of decks">
-    <mat-card-content>
+<mat-form-field>
+  <mat-label>Categories</mat-label>
+  <mat-select (selectionChange)="filterDecks($event.value)">
+    <mat-option *ngFor="let category of categories" [value]="category">
+      {{category}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-grid-list cols="6" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let deck of decks">
+    <mat-card>
+      <mat-card-content>
         <button mat-raised-button>
-            <mat-icon>settings</mat-icon>
+          <mat-icon>settings</mat-icon>
         </button>
-        <a href="/deck/{{deck.id}}">{{deck.title}}</a>
-    </mat-card-content>
-</mat-card>
+        <div>
+          <a href="/deck/{{deck.id}}">{{deck.title}}</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

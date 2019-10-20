@@ -4,6 +4,8 @@ open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Configuration
 open FlashcardTypes
 open MongoDB.Driver
+open System.Linq
+open MongoDB.Bson
 
 type FlashcardDeckController (configuration : IConfiguration) =
     inherit ControllerBase()
@@ -47,12 +49,31 @@ type FlashcardDeckController (configuration : IConfiguration) =
         collection.Find(Builders<FlashcardDeck>.Filter.Eq((fun deck -> deck.Id), id)).Single()
 
     [<HttpGet>]
-    member __.GetAllDecks() : FlashcardDeck[] =
+    member __.GetAllDecks(category : string) : FlashcardDeck[] =
         let client = new MongoClient(configuration.GetConnectionString("Database"))
         let database = client.GetDatabase("Flashcards")
         let collection = database.GetCollection<FlashcardDeck>("Decks")
         
-        let decks =
-            collection.Find(Builders<FlashcardDeck>.Filter.Empty).ToList()
+        let filter =
+            if System.String.IsNullOrEmpty(category) then
+                Builders<FlashcardDeck>.Filter.Empty
+            else
+                Builders<FlashcardDeck>.Filter.Where(fun deck -> deck.Tags.Contains(category))
 
-        Seq.toArray decks
+        collection.Find(filter).ToList()
+        |> Seq.toArray
+
+    [<HttpGet>]
+    member __.GetAllCategories() : string[] =
+        let client = new MongoClient(configuration.GetConnectionString("Database"))
+        let database = client.GetDatabase("Flashcards")
+        let collection = database.GetCollection<FlashcardDeck>("Decks")
+        
+        collection
+            .Find(Builders<FlashcardDeck>.Filter.Empty)
+            .Project(Builders<FlashcardDeck>.Projection.Expression(fun s -> s.Tags))
+            .ToList()
+        |> Seq.collect (fun s -> s)
+        |> Seq.distinct
+        |> Seq.sortBy (fun s -> s)
+        |> Seq.toArray
