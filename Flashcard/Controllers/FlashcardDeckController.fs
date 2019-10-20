@@ -45,3 +45,14 @@ type FlashcardDeckController (configuration : IConfiguration) =
         let collection = database.GetCollection<FlashcardDeck>("Decks")
 
         collection.Find(Builders<FlashcardDeck>.Filter.Eq((fun deck -> deck.Id), id)).Single()
+
+    [<HttpGet>]
+    member __.GetAllDecks() : FlashcardDeck[] =
+        let client = new MongoClient(configuration.GetConnectionString("Database"))
+        let database = client.GetDatabase("Flashcards")
+        let collection = database.GetCollection<FlashcardDeck>("Decks")
+        
+        let decks =
+            collection.Find(Builders<FlashcardDeck>.Filter.Empty).ToList()
+
+        Seq.toArray decks

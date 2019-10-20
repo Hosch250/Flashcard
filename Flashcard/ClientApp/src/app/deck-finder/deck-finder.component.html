@@ -1,0 +1,8 @@
+<mat-card *ngFor="let deck of decks">
+    <mat-card-content>
+        <button mat-raised-button>
+            <mat-icon>settings</mat-icon>
+        </button>
+        <a href="/deck/{{deck.id}}">{{deck.title}}</a>
+    </mat-card-content>
+</mat-card>
