@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +19,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
         MatIconModule,
         MatToolbarModule,
         AppRoutingModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        FlexLayoutModule
     ],
     providers: [],
     bootstrap: [AppComponent]

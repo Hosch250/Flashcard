@@ -5,7 +5,6 @@ open Microsoft.Extensions.Configuration
 open FlashcardTypes
 open MongoDB.Driver
 open System.Linq
-open MongoDB.Bson
 
 type FlashcardDeckController (configuration : IConfiguration) =
     inherit ControllerBase()
@@ -69,11 +68,13 @@ type FlashcardDeckController (configuration : IConfiguration) =
         let database = client.GetDatabase("Flashcards")
         let collection = database.GetCollection<FlashcardDeck>("Decks")
         
-        collection
-            .Find(Builders<FlashcardDeck>.Filter.Empty)
-            .Project(Builders<FlashcardDeck>.Projection.Expression(fun s -> s.Tags))
-            .ToList()
-        |> Seq.collect (fun s -> s)
-        |> Seq.distinct
-        |> Seq.sortBy (fun s -> s)
-        |> Seq.toArray
+        let data = collection
+                        .Find(Builders<FlashcardDeck>.Filter.Empty)
+                        .Project(Builders<FlashcardDeck>.Projection.Expression(fun s -> s.Tags))
+                        .ToList()
+                    |> Seq.collect (fun s -> s)
+                    |> Seq.distinct
+                    |> Seq.sortBy (fun s -> s)
+                    |> Seq.toArray
+
+        data

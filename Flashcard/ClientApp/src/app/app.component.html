@@ -1,6 +1,11 @@
-<mat-toolbar>
-  <button mat-button [routerLink]="['']">Flashcard</button>
-  <button mat-button [routerLink]="['/create']">Create</button>
-</mat-toolbar>
-
-<router-outlet></router-outlet>
+<div fxLayout="row">
+  <div fxFlex="15%"></div>
+  <div fxFlex>
+    <mat-toolbar>
+      <button mat-button [routerLink]="['']">Flashcard</button>
+      <button mat-button [routerLink]="['/create']">Create</button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <div fxFlex="15%"></div>
+</div>

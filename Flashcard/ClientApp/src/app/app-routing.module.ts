@@ -14,6 +14,10 @@ const routes: Routes = [
     {
         path: 'edit/deck/:id',
         loadChildren: () => import('./create/create.module').then(m => m.CreateModule)
+    },
+    {
+        path: 'deck/:id',
+        loadChildren: () => import('./deck-viewer/deck-viewer.module').then(m => m.DeckViewerModule)
     }
 ];
 
