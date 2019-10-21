@@ -12,16 +12,16 @@ export class DeckFinderComponent implements OnInit {
     constructor(private readonly flashcardDeckService: FlashcardDeckService, private http: HttpClient) { }
 
     private _decks: FlashcardDeck[];
-    private get decks() {
+    public get decks() {
         return this._decks;
     }
-    private set decks(value) {
+    public set decks(value) {
         this._decks = value;
     }
 
-    private categories: string[];
+    public categories: string[];
 
-    private filterDecks(category: any) {
+    public filterDecks(category: any) {
         this.flashcardDeckService.getAll(category).subscribe(data => {
             this.decks = data;
         });

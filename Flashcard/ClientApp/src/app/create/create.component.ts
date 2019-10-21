@@ -13,28 +13,28 @@ import { ActivatedRoute } from '@angular/router';
 export class CreateComponent implements OnInit {
 
     private _flashcardDeck: FlashcardDeck;
-    private get flashcardDeck() {
+    public get flashcardDeck() {
         return this._flashcardDeck;
     }
-    private set flashcardDeck(value) {
+    public set flashcardDeck(value) {
         this._flashcardDeck = value;
         this._allTags = value.tags;
     }
     
     private _selectedCard: Flashcard;
-    private get selectedCard() {
+    public get selectedCard() {
         return this._selectedCard;
     }
-    private set selectedCard(value) {
+    public set selectedCard(value) {
         this._selectedCard = value;
     }
     
     private _allTags: string[];
-    private get allTags() {
+    public get allTags() {
         return this._allTags;
     }
 
-    private addTagDialog(): void {
+    public addTagDialog(): void {
         const dialogRef = this.dialog.open(TagDialog);
 
         dialogRef.afterClosed().subscribe(tag => {
@@ -57,12 +57,12 @@ export class CreateComponent implements OnInit {
         }
     }
 
-    private setSelectedCard(ev: any) {
+    public setSelectedCard(ev: any) {
         var cardId = parseInt(ev.value);
         this.selectedCard = find(this.flashcardDeck.cards, {id: cardId});
     }
 
-    private addCard() {
+    public addCard() {
         this.flashcardDeck.cards.push({
             id: this.flashcardDeck.cards.length,
             label: '',
@@ -73,7 +73,7 @@ export class CreateComponent implements OnInit {
         this.selectedCard = this.flashcardDeck.cards[this.flashcardDeck.cards.length - 1];
     }
 
-    private deleteCard() {
+    public deleteCard() {
         let selectedIndex = indexOf(this.flashcardDeck.cards, this.selectedCard);
         remove(this.flashcardDeck.cards, card => card.id === this.selectedCard.id);
 
@@ -87,7 +87,7 @@ export class CreateComponent implements OnInit {
         }
     }
     
-    private saveDeck() {
+    public saveDeck() {
         this.flashcardDeckService.save(this.flashcardDeck).subscribe(data => {
             this.flashcardDeck = data;
             this.selectedCard = this.flashcardDeck.cards[0];

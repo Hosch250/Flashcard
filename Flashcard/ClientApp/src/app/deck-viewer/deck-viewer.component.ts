@@ -10,18 +10,18 @@ import { ActivatedRoute } from '@angular/router';
 export class DeckViewerComponent implements OnInit {
 
     private _flashcardDeck: FlashcardDeck;
-    private get flashcardDeck() {
+    public get flashcardDeck() {
         return this._flashcardDeck;
     }
-    private set flashcardDeck(value) {
+    public set flashcardDeck(value) {
         this._flashcardDeck = value;
     }
 
     private _selectedCard: Flashcard;
-    private get selectedCard() {
+    public get selectedCard() {
         return this._selectedCard;
     }
-    private set selectedCard(value) {
+    public set selectedCard(value) {
         this._selectedCard = value;
     }
 
@@ -34,7 +34,7 @@ export class DeckViewerComponent implements OnInit {
             });
     }
 
-    private previousCard() {
+    public previousCard() {
         if (this.selectedCard.id === 0) {
             return;
         }
@@ -42,7 +42,7 @@ export class DeckViewerComponent implements OnInit {
         this.selectedCard = this.flashcardDeck.cards[this.selectedCard.id - 1];
     }
 
-    private nextCard() {
+    public nextCard() {
         if (this.selectedCard.id === this.flashcardDeck.cards.length - 1) {
             return;
         }
