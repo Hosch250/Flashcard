@@ -1,7 +1,7 @@
 <section>
 <mat-card>
   <mat-card-content>
-    <div fxLayout="row" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
       <div fxFlex="250px">
         <mat-form-field>
           <mat-label>Categories</mat-label>
@@ -14,7 +14,7 @@
         </mat-form-field>
       </div>
       <div fxFlex>
-        <mat-grid-list cols="4" gutterSize="0" rowHeight="1:1">
+        <mat-grid-list [cols]="columns" gutterSize="0" rowHeight="170">
           <mat-grid-tile *ngFor="let deck of decks">
             <mat-card>
               <mat-card-content>
