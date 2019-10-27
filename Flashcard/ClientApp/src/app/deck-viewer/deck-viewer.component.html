@@ -18,10 +18,10 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="previousCard()" class="nav-prev" [disabled]="selectedCard.id === 0">
+      <button mat-raised-button color="primary" (click)="previousCard()" class="nav-prev" [disabled]="selectedCard?.id === 0">
         <mat-icon>navigate_before</mat-icon> Previous
       </button>
-      <button mat-raised-button color="primary" (click)="nextCard()" class="nav-next" [disabled]="selectedCard.id === flashcardDeck.cards.length - 1">
+      <button mat-raised-button color="primary" (click)="nextCard()" class="nav-next" [disabled]="selectedCard?.id === flashcardDeck?.cards.length - 1">
         <mat-icon>navigate_next</mat-icon> Next
       </button>
     </mat-card-actions>

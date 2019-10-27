@@ -2,9 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateComponent, TagDialog } from './create.component';
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'; 

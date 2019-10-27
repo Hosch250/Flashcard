@@ -26,12 +26,6 @@ export class DeckViewerComponent implements OnInit {
     }
 
     constructor(private flashcardDeckService: FlashcardDeckService, private route: ActivatedRoute) {
-        this.flashcardDeckService
-            .get(parseInt(route.snapshot.paramMap.get('id')))
-            .subscribe(data => {
-                this.flashcardDeck = data;
-                this.selectedCard = this.flashcardDeck.cards[0];
-            });
     }
 
     public previousCard() {
@@ -51,5 +45,11 @@ export class DeckViewerComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.flashcardDeckService
+            .get(parseInt(this.route.snapshot.paramMap.get('id')))
+            .subscribe(data => {
+                this.flashcardDeck = data;
+                this.selectedCard = this.flashcardDeck.cards[0];
+            });
     }
 }

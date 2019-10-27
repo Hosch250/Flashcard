@@ -1,16 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeckViewerComponent } from './deck-viewer.component';
-import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
+import { FlashcardDeckService, FlashcardDeck } from '../shared/services/flashcardDeck.service';
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 describe('DeckViewerComponent', () => {
   let component: DeckViewerComponent;
@@ -25,11 +26,14 @@ describe('DeckViewerComponent', () => {
             MatIconModule,
             MatCardModule,
             FlexLayoutModule,
-            HttpClientModule,
+            HttpClientTestingModule,
             RouterTestingModule,
             NoopAnimationsModule
         ],
-        providers: [FlashcardDeckService],
+        providers: [FlashcardDeckService, {
+            provide: ActivatedRoute,
+            useValue: { snapshot: { paramMap: convertToParamMap( { 'id': '1' } ) } }
+          }],
     })
     .compileComponents();
   }));
@@ -41,6 +45,20 @@ describe('DeckViewerComponent', () => {
   });
 
   it('should create', () => {
+    let httpMock = TestBed.get(HttpTestingController);
+    const data : FlashcardDeck = {
+      id: 1,
+      title: 'test',
+      tags: ['tag'],
+      cards: [{
+          id: 1,
+          label: 'card',
+          front: 'card',
+          back: 'card'
+      }]
+    };
+    let request = httpMock.expectOne('/FlashcardDeck/getDeck/1');
+    request.flush(data);
     expect(component).toBeTruthy();
   });
 });
