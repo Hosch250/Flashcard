@@ -35,6 +35,11 @@ export class CreateComponent implements OnInit {
         return this._allTags;
     }
 
+    public log(data: any) {
+        console.log(data);
+        this.setSelectedCard(data);
+    }
+
     public addTagDialog(): void {
         const dialogRef = this.dialog.open(TagDialog);
 

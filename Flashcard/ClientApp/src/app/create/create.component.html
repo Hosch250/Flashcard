@@ -50,8 +50,8 @@
                         <div fxFlex>
                             <mat-form-field>
                                 <mat-label>Cards</mat-label>
-                                <mat-select value="selectedCard?.id || 0" (selectionChange)="setSelectedCard($event)">
-                                    <mat-option *ngFor="let card of flashcardDeck?.cards" value="{{card.id}}">{{card.label}}</mat-option>
+                                <mat-select [value]="selectedCard?.id || 0" (selectionChange)="setSelectedCard($event)">
+                                    <mat-option *ngFor="let card of flashcardDeck?.cards" [value]="card.id">{{card.label}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
