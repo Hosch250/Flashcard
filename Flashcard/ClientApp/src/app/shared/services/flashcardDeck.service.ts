@@ -32,7 +32,7 @@ export class FlashcardDeckService {
     getNew(): FlashcardDeck {
         return {
             id: 0,
-            title: '',
+            title: '(New Deck)',
             cards: [],
             tags: []
         }

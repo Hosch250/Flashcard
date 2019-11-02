@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FlashcardDeckService, FlashcardDeck, Flashcard } from '../shared/services/flashcardDeck.service';
-import { find, remove, indexOf } from 'lodash';
+import { find, remove, indexOf, findKey } from 'lodash';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
     selector: 'fcd-create',
@@ -43,8 +44,19 @@ export class CreateComponent implements OnInit {
             }
         });
     }
-    
-    constructor(private flashcardDeckService: FlashcardDeckService, private dialog: MatDialog, private route: ActivatedRoute) {
+
+    private readonly breakpointsToShowSidebar = {
+        "(max-width: 599.99px) and (orientation: portrait)": false,
+        "(min-width: 600px) and (max-width: 839.99px) and (orientation: portrait)": false,
+        "(min-width: 840px) and (orientation: portrait)": false,
+        "(max-width: 959.99px) and (orientation: landscape)": false,
+        "(min-width: 960px) and (max-width: 1279.99px) and (orientation: landscape)": true,
+        "(min-width: 1280px) and (orientation: landscape)": true
+    };
+
+    public showSidebar = true;
+
+    constructor(private readonly flashcardDeckService: FlashcardDeckService, private readonly dialog: MatDialog, private readonly route: ActivatedRoute, private readonly breakpointObserver: BreakpointObserver) {
         if (!route.snapshot.paramMap.has('id')) {
             this.flashcardDeck = this.flashcardDeckService.getNew();
         } else {
@@ -55,6 +67,21 @@ export class CreateComponent implements OnInit {
                     this.selectedCard = this.flashcardDeck.cards[0];
                 });
         }
+
+        breakpointObserver.observe([
+            Breakpoints.Handset,
+            Breakpoints.Tablet,
+            Breakpoints.Web,
+            Breakpoints.HandsetPortrait,
+            Breakpoints.TabletPortrait,
+            Breakpoints.WebPortrait,
+            Breakpoints.HandsetLandscape,
+            Breakpoints.TabletLandscape,
+            Breakpoints.WebLandscape
+        ]).subscribe(result => {
+            let breakpoint = findKey(result.breakpoints, o => o);
+            this.showSidebar = this.breakpointsToShowSidebar[breakpoint];
+        });
     }
 
     public setSelectedCard(ev: any) {
@@ -65,7 +92,7 @@ export class CreateComponent implements OnInit {
     public addCard() {
         this.flashcardDeck.cards.push({
             id: this.flashcardDeck.cards.length,
-            label: '',
+            label: '(New Card)',
             front: '',
             back: ''
         });

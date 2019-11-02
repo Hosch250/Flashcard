@@ -20,7 +20,7 @@ export class DeckFinderComponent implements OnInit {
         "(min-width: 1280px) and (orientation: landscape)": 3
     };
 
-    constructor(private readonly flashcardDeckService: FlashcardDeckService, private http: HttpClient, private breakpointObserver: BreakpointObserver) {
+    constructor(private readonly flashcardDeckService: FlashcardDeckService, private readonly http: HttpClient, private readonly breakpointObserver: BreakpointObserver) {
         breakpointObserver.observe([
             Breakpoints.Handset,
             Breakpoints.Tablet,
