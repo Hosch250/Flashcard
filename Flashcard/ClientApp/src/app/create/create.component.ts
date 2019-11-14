@@ -57,7 +57,7 @@ export class CreateComponent implements OnInit {
     }
 
     public addCard() {
-        let cards = this.form.get('cards').value as FormArray;
+        let cards = this.form.get('cards') as FormArray;
         cards.push(this.fb.group({
             id: 0,
             label: '(New Card)',
@@ -65,7 +65,7 @@ export class CreateComponent implements OnInit {
             back: ''
         }));
 
-        this.selectedCardId = cards.length;
+        this.selectedCardId = cards.length - 1;
     }
 
     public deleteCard() {
@@ -82,10 +82,21 @@ export class CreateComponent implements OnInit {
     }
     
     public saveDeck() {
-        //this.flashcardDeckService.save(this.flashcardDeck).subscribe(data => {
-        //    this.flashcardDeck = data;
-        //    this.selectedCard = this.flashcardDeck.cards[0];
-        //});
+        this.flashcardDeckService.save(this.form.value).subscribe(data => {
+            this.form = this.fb.group({
+                id: data.id,
+                title: data.title,
+                cards: this.fb.array(data.cards.map(card => this.fb.group({
+                    id: card.id,
+                    label: card.label,
+                    front: card.front,
+                    back: card.back
+                }))),
+                tags: this.fb.array(data.tags)
+            });
+            this.allTags = data.tags;
+            this.selectedCardId = 0;
+        });
     }
 
     ngOnInit() {
@@ -94,7 +105,12 @@ export class CreateComponent implements OnInit {
             this.form = this.fb.group({
                 id: deck.id,
                 title: deck.title,
-                cards: this.fb.array(deck.cards),
+                cards: this.fb.array(deck.cards.map(card => this.fb.group({
+                    id: card.id,
+                    label: card.label,
+                    front: card.front,
+                    back: card.back
+                }))),
                 tags: this.fb.array(deck.tags)
             });
         } else {
