@@ -4,10 +4,6 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: '',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-    },
-    {
         path: 'create',
         loadChildren: () => import('./create/create.module').then(m => m.CreateModule)
     },
@@ -18,7 +14,11 @@ const routes: Routes = [
     {
         path: 'deck/:id',
         loadChildren: () => import('./deck-viewer/deck-viewer.module').then(m => m.DeckViewerModule)
-    }
+    },
+    {
+        path: '**',
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    },
 ];
 
 @NgModule({
