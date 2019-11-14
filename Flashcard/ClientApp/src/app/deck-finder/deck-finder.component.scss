@@ -1,29 +1,25 @@
-section {  
-  mat-grid-tile {
+section {
+  mat-card.deck {
+    height: 150px;
+    width: 250px;
+    margin: 10px;
     padding: 10px;
+    background-color: whitesmoke;
 
-    mat-card {
-      height: 150px;
-      width: 250px;
-      margin: 10px;
-      padding: 10px;
-      background-color: whitesmoke;
+    #edit-deck {
+      float: right !important;
+    }
 
-      #edit-deck {
-        float: right !important;
-      }
+    .view-deck-container {
+      text-align: center;
+      padding-top: 40px;
+    }
 
-      .view-deck-container {
-        text-align: center;
-        padding-top: 40px;
-      }
-
-      .view-deck {
-        font-weight: bold;
-        font-size: 200%;
-        color: sienna;
-        text-decoration: underline;
-      }
+    .view-deck {
+      font-weight: bold;
+      font-size: 200%;
+      color: sienna;
+      text-decoration: underline;
     }
   }
 }

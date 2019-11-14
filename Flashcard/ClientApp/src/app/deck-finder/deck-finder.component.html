@@ -1,37 +1,33 @@
 <section>
-<mat-card>
-  <mat-card-content>
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
-      <div fxFlex="250px">
-        <mat-form-field>
-          <mat-label>Categories</mat-label>
-          <mat-select (selectionChange)="filterDecks($event.value)">
-            <mat-option class="unfiltered">(Unfiltered)</mat-option>
-            <mat-option *ngFor="let category of categories" [value]="category">
-              {{category}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+  <mat-card>
+    <mat-card-content>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+        <div fxFlex="250px">
+          <mat-form-field>
+            <mat-label>Categories</mat-label>
+            <mat-select (selectionChange)="filterDecks($event.value)">
+              <mat-option class="unfiltered">(Unfiltered)</mat-option>
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{category}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="20px" fxFlex>
+          <mat-card class="deck" *ngFor="let deck of decks">
+            <mat-card-content>
+              <div>
+                <a id="edit-deck" mat-mini-fab [routerLink]="['/edit/deck', deck.id]">
+                  <mat-icon>settings</mat-icon>
+                </a>
+              </div>
+              <div class="view-deck-container">
+                <a class="view-deck" [routerLink]="['/deck', deck.id]">{{deck.title}}</a>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
-      <div fxFlex>
-        <mat-grid-list [cols]="columns" gutterSize="0" rowHeight="170">
-          <mat-grid-tile *ngFor="let deck of decks">
-            <mat-card>
-              <mat-card-content>
-                <div>
-                  <a id="edit-deck" mat-mini-fab [routerLink]="['/edit/deck', deck.id]">
-                    <mat-icon>settings</mat-icon>
-                  </a>
-                </div>
-                <div class="view-deck-container">
-                  <a class="view-deck" [routerLink]="['/deck', deck.id]">{{deck.title}}</a>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
 </section>
