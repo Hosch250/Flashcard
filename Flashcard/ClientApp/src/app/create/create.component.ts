@@ -142,6 +142,7 @@ export class CreateComponent implements OnInit {
                         tags: this.fb.array(data.tags)
                     });
                     this.allTags = data.tags;
+                    this.selectedCardId = 0;
                     //this.flashcardDeck = data;
                     //this.selectedCard = this.flashcardDeck.cards[0];
                 });

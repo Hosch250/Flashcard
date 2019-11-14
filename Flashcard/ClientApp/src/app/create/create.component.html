@@ -29,7 +29,7 @@
                 <div fxLayout="column">
                   <div fxFlex>
                     <mat-button-toggle-group vertical [value]="selectedCardId || 0" (change)="setSelectedCard($event)">
-                      <mat-button-toggle *ngFor="let card of form.get('cards').value" value="{{card.id}}" [checked]="card.id === selectedCardId">
+                      <mat-button-toggle *ngFor="let card of form.get('cards').value" [value]="card.id" [checked]="card.id === selectedCardId">
                         {{card.label}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -42,6 +42,27 @@
                 </div>
               </mat-card-content>
             </mat-card>
+          </div>
+
+          <div fxFlex *ngIf="!showSidebar">
+            <div fxLayout="row" class="card-select-selector">
+              <div fxFlex="25px" class="menu-icon">
+                <mat-icon>menu</mat-icon>
+              </div>
+              <div fxFlex>
+                <mat-form-field>
+                  <mat-label>Cards</mat-label>
+                  <mat-select [value]="selectedCardId" (selectionChange)="setSelectedCard($event)">
+                    <mat-option *ngFor="let card of form.get('cards').value" [value]="card.id">{{card.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="130px" class="create-card-button">
+                <button mat-raised-button color="primary" (click)="addCard()">
+                  <mat-icon>add</mat-icon> Create Card
+                </button>
+              </div>
+            </div>
           </div>
 
           <div formArrayName="cards">
@@ -66,30 +87,6 @@
             </div>
           </div>
         </div>
-
-        <!--<div fxLayout="{{ showSidebar ? 'row' : 'column' }}" fxLayoutGap="{{ showSidebar ? '20px' : '' }}">
-
-          <div fxFlex *ngIf="!showSidebar">
-            <div fxLayout="row" class="card-select-selector">
-              <div fxFlex="25px" class="menu-icon">
-                <mat-icon>menu</mat-icon>
-              </div>
-              <div fxFlex>
-                <mat-form-field>
-                  <mat-label>Cards</mat-label>
-                  <mat-select [value]="selectedCard?.id || 0" (selectionChange)="setSelectedCard($event)">
-                    <mat-option *ngFor="let card of flashcardDeck?.cards" [value]="card.id">{{card.label}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div fxFlex="130px" class="create-card-button">
-                <button mat-raised-button color="primary" (click)="addCard()">
-                  <mat-icon>add</mat-icon> Create Card
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>-->
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit">
