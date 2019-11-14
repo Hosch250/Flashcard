@@ -23,7 +23,7 @@
         </div>
 
         <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.sm="0" fxLayoutGap.lt-sm="0">
-          <div fxFlex="250px" fxHide="" fxShow.gt-sm="">
+          <div fxFlex="250px" fxHide fxShow.gt-sm>
             <mat-card class="flashcard-list">
               <mat-card-content>
                 <div fxLayout="column">
@@ -44,7 +44,7 @@
             </mat-card>
           </div>
 
-          <div fxFlex *ngIf="!showSidebar" fxHide="" fxShow.sm="" fxShow.lt-sm="">
+          <div fxFlex *ngIf="!showSidebar" fxHide fxShow.sm fxShow.lt-sm>
             <div fxLayout="row" class="card-select-selector">
               <div fxFlex="25px" class="menu-icon">
                 <mat-icon>menu</mat-icon>
