@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
-import { findKey, includes, trim } from 'lodash';
+import { includes, trim } from 'lodash';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -16,8 +15,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class CreateComponent implements OnInit {
     public Editor = ClassicEditor;
     public allTags: string[] = [];
-    public selectedCardId: number = undefined;
-    public showSidebar = true;
+    public selectedCardId: number = 0;
     public form: FormGroup = this.fb.group({
         id: 0,
         title: '',
@@ -37,20 +35,10 @@ export class CreateComponent implements OnInit {
         });
     }
 
-    private readonly breakpointsToShowSidebar = {
-        "(max-width: 599.99px) and (orientation: portrait)": false,
-        "(min-width: 600px) and (max-width: 839.99px) and (orientation: portrait)": false,
-        "(min-width: 840px) and (orientation: portrait)": false,
-        "(max-width: 959.99px) and (orientation: landscape)": false,
-        "(min-width: 960px) and (max-width: 1279.99px) and (orientation: landscape)": true,
-        "(min-width: 1280px) and (orientation: landscape)": true
-    };
-
     constructor(private readonly fb: FormBuilder,
         private readonly flashcardDeckService: FlashcardDeckService,
         private readonly dialog: MatDialog,
-        private readonly route: ActivatedRoute,
-        private readonly breakpointObserver: BreakpointObserver) {
+        private readonly route: ActivatedRoute) {
     }
 
     public setSelectedCard(ev: any) {
@@ -74,7 +62,7 @@ export class CreateComponent implements OnInit {
         cards.removeAt(this.selectedCardId);
 
         if (cards.length === 0) {
-            this.selectedCardId = null;
+            this.selectedCardId = 0;
         } else {
             this.selectedCardId = this.selectedCardId === 0
                 ? 0
@@ -133,21 +121,6 @@ export class CreateComponent implements OnInit {
                     this.selectedCardId = 0;
                 });
         }
-
-        this.breakpointObserver.observe([
-            Breakpoints.Handset,
-            Breakpoints.Tablet,
-            Breakpoints.Web,
-            Breakpoints.HandsetPortrait,
-            Breakpoints.TabletPortrait,
-            Breakpoints.WebPortrait,
-            Breakpoints.HandsetLandscape,
-            Breakpoints.TabletLandscape,
-            Breakpoints.WebLandscape
-        ]).subscribe(result => {
-            let breakpoint = findKey(result.breakpoints, o => o);
-            this.showSidebar = this.breakpointsToShowSidebar[breakpoint];
-        });
     }
 }
 

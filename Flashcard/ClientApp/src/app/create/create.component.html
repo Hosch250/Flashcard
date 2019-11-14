@@ -22,13 +22,13 @@
           </div>
         </div>
 
-        <div fxLayout="{{ showSidebar ? 'row' : 'column' }}" fxLayoutGap="{{ showSidebar ? '20px' : '' }}">
-          <div fxFlex="250px" *ngIf="showSidebar">
+        <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.sm="0" fxLayoutGap.lt-sm="0">
+          <div fxFlex="250px" fxHide="" fxShow.gt-sm="">
             <mat-card class="flashcard-list">
               <mat-card-content>
                 <div fxLayout="column">
                   <div fxFlex>
-                    <mat-button-toggle-group vertical [value]="selectedCardId || 0" (change)="setSelectedCard($event)">
+                    <mat-button-toggle-group vertical [value]="selectedCardId" (change)="setSelectedCard($event)">
                       <mat-button-toggle *ngFor="let card of form.get('cards').value" [value]="card.id" [checked]="card.id === selectedCardId">
                         {{card.label}}
                       </mat-button-toggle>
@@ -44,7 +44,7 @@
             </mat-card>
           </div>
 
-          <div fxFlex *ngIf="!showSidebar">
+          <div fxFlex *ngIf="!showSidebar" fxHide="" fxShow.sm="" fxShow.lt-sm="">
             <div fxLayout="row" class="card-select-selector">
               <div fxFlex="25px" class="menu-icon">
                 <mat-icon>menu</mat-icon>
