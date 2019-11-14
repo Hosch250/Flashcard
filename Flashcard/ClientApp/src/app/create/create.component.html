@@ -22,14 +22,14 @@
           </div>
         </div>
 
-        <!--<div fxLayout="{{ showSidebar ? 'row' : 'column' }}" fxLayoutGap="{{ showSidebar ? '20px' : '' }}">
+        <div fxLayout="{{ showSidebar ? 'row' : 'column' }}" fxLayoutGap="{{ showSidebar ? '20px' : '' }}">
           <div fxFlex="250px" *ngIf="showSidebar">
             <mat-card class="flashcard-list">
               <mat-card-content>
                 <div fxLayout="column">
                   <div fxFlex>
-                    <mat-button-toggle-group vertical [value]="selectedCard?.id || 0" (change)="setSelectedCard($event)">
-                      <mat-button-toggle *ngFor="let card of flashcardDeck?.cards" value="{{card.id}}" [checked]="card.id === selectedCard?.id">
+                    <mat-button-toggle-group vertical [value]="selectedCardId || 0" (change)="setSelectedCard($event)">
+                      <mat-button-toggle *ngFor="let card of form.get('cards').value" value="{{card.id}}" [checked]="card.id === selectedCardId">
                         {{card.label}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -43,6 +43,32 @@
               </mat-card-content>
             </mat-card>
           </div>
+
+          <div formArrayName="cards">
+            <div fxFlex *ngFor="let card of form.get('cards').controls; index as i" [formGroupName]="i">
+              <mat-card *ngIf="selectedCardId === i">
+                <mat-card-title>{{form.get('title').value}}</mat-card-title>
+                <mat-card-content>
+                  <mat-form-field>
+                    <input matInput placeholder="Card Label" formControlName="label" />
+                  </mat-form-field>
+                  <mat-form-field>
+                    <textarea matInput placeholder="Card Front" rows="4" formControlName="front"></textarea>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <textarea matInput placeholder="Card Back" rows="4" formControlName="back"></textarea>
+                  </mat-form-field>
+                  <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()">
+                    <mat-icon>delete_outline</mat-icon> Delete Card
+                  </button>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+
+        <!--<div fxLayout="{{ showSidebar ? 'row' : 'column' }}" fxLayoutGap="{{ showSidebar ? '20px' : '' }}">
+
           <div fxFlex *ngIf="!showSidebar">
             <div fxLayout="row" class="card-select-selector">
               <div fxFlex="25px" class="menu-icon">
@@ -62,25 +88,6 @@
                 </button>
               </div>
             </div>
-          </div>
-          <div fxFlex *ngIf="selectedCard">
-            <mat-card>
-              <mat-card-title>{{flashcardDeck?.title}}</mat-card-title>
-              <mat-card-content>
-                <mat-form-field>
-                  <input matInput placeholder="Card Label" [value]="selectedCard.label" (input)="selectedCard.label = $event.target.value" />
-                </mat-form-field>
-                <mat-form-field>
-                  <textarea matInput placeholder="Card Front" rows="4" [value]="selectedCard.front" (input)="selectedCard.front = $event.target.value"></textarea>
-                </mat-form-field>
-                <mat-form-field>
-                  <textarea matInput placeholder="Card Back" rows="4" [value]="selectedCard.back" (input)="selectedCard.back = $event.target.value"></textarea>
-                </mat-form-field>
-                <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()">
-                  <mat-icon>delete_outline</mat-icon> Delete Card
-                </button>
-              </mat-card-content>
-            </mat-card>
           </div>
         </div>-->
       </mat-card-content>
