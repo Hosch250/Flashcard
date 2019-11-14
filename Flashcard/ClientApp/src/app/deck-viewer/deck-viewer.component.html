@@ -6,12 +6,12 @@
         <div class="flipper">
           <mat-card class="front" fxLayout="column">
             <div fxFlex></div>
-            <div fxFlex>{{selectedCard?.front}}</div>
+            <div fxFlex [innerHTML]="selectedCard?.front"></div>
             <div fxFlex></div>
           </mat-card>
           <mat-card class="back" fxLayout="column">
             <div fxFlex></div>
-            <div fxFlex>{{selectedCard?.back}}</div>
+            <div fxFlex [innerHTML]="selectedCard?.back"></div>
             <div fxFlex></div>
           </mat-card>
         </div>

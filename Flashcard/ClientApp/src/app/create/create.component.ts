@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FlashcardDeckService, FlashcardDeck, Flashcard } from '../shared/services/flashcardDeck.service';
-import { find, remove, indexOf, findKey, includes, trim } from 'lodash';
+import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
+import { findKey, includes, trim } from 'lodash';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'fcd-create',
@@ -13,7 +14,16 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
     encapsulation: ViewEncapsulation.None
 })
 export class CreateComponent implements OnInit {
-    private allTags: string[] = [];
+    public Editor = ClassicEditor;
+    public allTags: string[] = [];
+    public selectedCardId: number = undefined;
+    public showSidebar = true;
+    public form: FormGroup = this.fb.group({
+        id: 0,
+        title: '',
+        cards: this.fb.array([]),
+        tags: this.fb.array([])
+    });
 
     public addTagDialog(): void {
         const dialogRef = this.dialog.open(TagDialog);
@@ -35,15 +45,6 @@ export class CreateComponent implements OnInit {
         "(min-width: 960px) and (max-width: 1279.99px) and (orientation: landscape)": true,
         "(min-width: 1280px) and (orientation: landscape)": true
     };
-
-    public selectedCardId: number = undefined;
-    public showSidebar = true;
-    public form: FormGroup = this.fb.group({
-        id: 0,
-        title: '',
-        cards: this.fb.array([]),
-        tags: this.fb.array([])
-    });
 
     constructor(private readonly fb: FormBuilder,
         private readonly flashcardDeckService: FlashcardDeckService,

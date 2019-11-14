@@ -73,12 +73,9 @@
                   <mat-form-field>
                     <input matInput placeholder="Card Label" formControlName="label" />
                   </mat-form-field>
-                  <mat-form-field>
-                    <textarea matInput placeholder="Card Front" rows="4" formControlName="front"></textarea>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <textarea matInput placeholder="Card Back" rows="4" formControlName="back"></textarea>
-                  </mat-form-field>
+                  <label for="card-front">Card Front</label>
+                  <ckeditor [editor]="Editor" formControlName="front"></ckeditor>
+                  <ckeditor [editor]="Editor" formControlName="back"></ckeditor>
                   <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()" type="button">
                     <mat-icon>delete_outline</mat-icon> Delete Card
                   </button>
