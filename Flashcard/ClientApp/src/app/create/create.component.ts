@@ -13,24 +13,6 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
     encapsulation: ViewEncapsulation.None
 })
 export class CreateComponent implements OnInit {
-
-    //private _flashcardDeck: FlashcardDeck;
-    //public get flashcardDeck() {
-    //    return this._flashcardDeck;
-    //}
-    //public set flashcardDeck(value) {
-    //    this._flashcardDeck = value;
-    //    this._allTags = value.tags;
-    //}
-    
-    //private _selectedCard: Flashcard;
-    //public get selectedCard() {
-    //    return this._selectedCard;
-    //}
-    //public set selectedCard(value) {
-    //    this._selectedCard = value;
-    //}
-    
     private allTags: string[] = [];
 
     public addTagDialog(): void {
@@ -84,29 +66,19 @@ export class CreateComponent implements OnInit {
         }));
 
         this.selectedCardId = cards.length;
-
-        //this.flashcardDeck.cards.push({
-        //    id: this.flashcardDeck.cards.length,
-        //    label: '(New Card)',
-        //    front: '',
-        //    back: ''
-        //});
-
-        //this.selectedCard = this.flashcardDeck.cards[this.flashcardDeck.cards.length - 1];
     }
 
     public deleteCard() {
-        //let selectedIndex = indexOf(this.flashcardDeck.cards, this.selectedCard);
-        //remove(this.flashcardDeck.cards, card => card.id === this.selectedCard.id);
+        let cards = this.form.get('cards') as FormArray;
+        cards.removeAt(this.selectedCardId);
 
-        //if (this.flashcardDeck.cards.length === 0) {
-        //    this.selectedCard = null;
-        //} else {
-        //    let newIndex = selectedIndex === 0
-        //        ? 0
-        //        : selectedIndex - 1;
-        //    this.selectedCard = this.flashcardDeck.cards[newIndex];
-        //}
+        if (cards.length === 0) {
+            this.selectedCardId = null;
+        } else {
+            this.selectedCardId = this.selectedCardId === 0
+                ? 0
+                : this.selectedCardId - 1;
+        }
     }
     
     public saveDeck() {
@@ -125,7 +97,6 @@ export class CreateComponent implements OnInit {
                 cards: this.fb.array(deck.cards),
                 tags: this.fb.array(deck.tags)
             });
-            //this.flashcardDeck = this.flashcardDeckService.getNew();
         } else {
             this.flashcardDeckService
                 .get(parseInt(this.route.snapshot.paramMap.get('id')))
@@ -143,8 +114,6 @@ export class CreateComponent implements OnInit {
                     });
                     this.allTags = data.tags;
                     this.selectedCardId = 0;
-                    //this.flashcardDeck = data;
-                    //this.selectedCard = this.flashcardDeck.cards[0];
                 });
         }
 
@@ -162,11 +131,6 @@ export class CreateComponent implements OnInit {
             let breakpoint = findKey(result.breakpoints, o => o);
             this.showSidebar = this.breakpointsToShowSidebar[breakpoint];
         });
-    }
-
-    public log(i) {
-        console.log("s: " + this.selectedCardId);
-        console.log("i: " + i);
     }
 }
 
