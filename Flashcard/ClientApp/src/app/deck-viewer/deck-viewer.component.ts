@@ -35,6 +35,7 @@ export class DeckViewerComponent implements OnInit {
             return;
         }
 
+        document.getElementsByClassName('flip-container').item(0).classList.remove('hover');
         this.selectedCard = this.flashcardDeck.cards[this.selectedCard.id - 1];
     }
 
@@ -43,6 +44,7 @@ export class DeckViewerComponent implements OnInit {
             return;
         }
 
+        document.getElementsByClassName('flip-container').item(0).classList.remove('hover');
         this.selectedCard = this.flashcardDeck.cards[this.selectedCard.id + 1];
     }
 
