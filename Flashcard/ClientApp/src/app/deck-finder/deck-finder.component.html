@@ -1,8 +1,8 @@
 <section>
   <mat-card>
     <mat-card-content>
-      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
-        <div fxFlex="250px">
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm>
+        <div fxFlex="250px" fxFlex.lt-sm>
           <mat-form-field>
             <mat-label>Categories</mat-label>
             <mat-select (selectionChange)="filterDecks($event.value)">
