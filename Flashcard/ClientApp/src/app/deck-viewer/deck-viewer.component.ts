@@ -3,6 +3,7 @@ import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardDeck } from '../shared/models/flashcardDeck';
 import { Flashcard } from '../shared/models/flashcard';
+import { shuffle } from 'lodash';
 
 @Component({
     selector: 'fcd-deck-viewer',
@@ -19,33 +20,31 @@ export class DeckViewerComponent implements OnInit {
         this._flashcardDeck = value;
     }
 
-    private _selectedCard: Flashcard;
-    public get selectedCard() {
-        return this._selectedCard;
-    }
-    public set selectedCard(value) {
-        this._selectedCard = value;
-    }
+    public selectedCardIndex: number = 0;
 
     constructor(private flashcardDeckService: FlashcardDeckService, private route: ActivatedRoute) {
     }
 
     public previousCard() {
-        if (this.selectedCard.id === 0) {
+        if (this.selectedCardIndex === 0) {
             return;
         }
 
         document.getElementsByClassName('flip-container').item(0).classList.remove('hover');
-        this.selectedCard = this.flashcardDeck.cards[this.selectedCard.id - 1];
+        this.selectedCardIndex--;
     }
 
     public nextCard() {
-        if (this.selectedCard.id === this.flashcardDeck.cards.length - 1) {
+        if (this.selectedCardIndex === this.flashcardDeck.cards.length - 1) {
             return;
         }
 
         document.getElementsByClassName('flip-container').item(0).classList.remove('hover');
-        this.selectedCard = this.flashcardDeck.cards[this.selectedCard.id + 1];
+        this.selectedCardIndex++;
+    }
+
+    public shuffle() {
+        this.flashcardDeck.cards = shuffle(this.flashcardDeck.cards);
     }
 
     ngOnInit() {
@@ -53,7 +52,6 @@ export class DeckViewerComponent implements OnInit {
             .get(parseInt(this.route.snapshot.paramMap.get('id')))
             .subscribe(data => {
                 this.flashcardDeck = data;
-                this.selectedCard = this.flashcardDeck.cards[0];
             });
     }
 }

@@ -1,27 +1,30 @@
 <section>
   <mat-card>
+    <button mat-raised-button color="primary" type="button" class="pull-right" (click)="shuffle()">
+      <mat-icon>shuffle</mat-icon> Shuffle Deck
+    </button>
     <mat-card-title>{{flashcardDeck?.title}}</mat-card-title>
     <mat-card-content>
       <div class="flip-container" onclick="this.classList.toggle('hover');">
         <div class="flipper">
           <mat-card class="front" fxLayout="column">
             <div fxFlex></div>
-            <div fxFlex [innerHTML]="selectedCard?.front"></div>
+            <div fxFlex [innerHTML]="flashcardDeck?.cards[selectedCardIndex].front"></div>
             <div fxFlex></div>
           </mat-card>
           <mat-card class="back" fxLayout="column">
             <div fxFlex></div>
-            <div fxFlex [innerHTML]="selectedCard?.back"></div>
+            <div fxFlex [innerHTML]="flashcardDeck?.cards[selectedCardIndex].back"></div>
             <div fxFlex></div>
           </mat-card>
         </div>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="previousCard()" class="nav-prev" [disabled]="selectedCard?.id === 0">
+      <button mat-raised-button color="primary" (click)="previousCard()" class="nav-prev" [disabled]="selectedCardIndex === 0">
         <mat-icon>navigate_before</mat-icon> Previous
       </button>
-      <button mat-raised-button color="primary" (click)="nextCard()" class="nav-next" [disabled]="selectedCard?.id === flashcardDeck?.cards.length - 1">
+      <button mat-raised-button color="primary" (click)="nextCard()" class="nav-next" [disabled]="selectedCardIndex === flashcardDeck.cards.length - 1">
         <mat-icon>navigate_next</mat-icon> Next
       </button>
     </mat-card-actions>
