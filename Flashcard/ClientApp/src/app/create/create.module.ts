@@ -13,7 +13,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({

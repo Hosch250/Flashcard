@@ -15,6 +15,7 @@
   <ItemGroup>
     <Compile Include="Flashcard.fs" />
     <Compile Include="Controllers\FlashcardDeckController.fs" />
+    <Compile Include="Controllers\NoteController.fs" />
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -39,6 +40,9 @@
     <ItemGroup>
       <None Remove="ClientApp\src\app\shared\models\Flashcard.ts" />
       <None Remove="ClientApp\src\app\shared\models\FlashcardDeck.ts" />
+    </ItemGroup>
+    <ItemGroup>
+      <TypeScriptCompile Remove="ClientApp\src\app\shared\models\Note.ts" />
     </ItemGroup>
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
