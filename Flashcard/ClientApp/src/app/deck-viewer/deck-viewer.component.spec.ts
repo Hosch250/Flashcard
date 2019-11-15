@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeckViewerComponent } from './deck-viewer.component';
-import { FlashcardDeckService, FlashcardDeck } from '../shared/services/flashcardDeck.service';
+import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
+import { FlashcardDeck } from "../shared/services/FlashcardDeck";
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';

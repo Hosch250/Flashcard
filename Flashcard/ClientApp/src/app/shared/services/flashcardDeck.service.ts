@@ -1,33 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs';
-import { FormGroup } from '@angular/forms';
-
-export interface Flashcard {
-    id: number;
-    label: string;
-    front: string;
-    back: string;
-}
-
-export interface FlashcardDeck {
-    id: number;
-    title: string;
-    cards: Flashcard[];
-    tags: string[];
-}
+import { FlashcardDeck } from '../models/flashcardDeck';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FlashcardDeckService {
-    
-    private _httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
-    };
-    
     constructor(private http: HttpClient) { }
 
     getNew(): FlashcardDeck {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FlashcardDeckService, FlashcardDeck } from '../shared/services/flashcardDeck.service';
+import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
 import { HttpClient } from '@angular/common/http';
+import { FlashcardDeck } from '../shared/models/flashcardDeck';
 
 @Component({
     selector: 'fcd-deck-finder',

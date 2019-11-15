@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FlashcardDeckService, Flashcard, FlashcardDeck } from '../shared/services/flashcardDeck.service';
+import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
 import { ActivatedRoute } from '@angular/router';
+import { FlashcardDeck } from '../shared/models/flashcardDeck';
+import { Flashcard } from '../shared/models/flashcard';
 
 @Component({
     selector: 'fcd-deck-viewer',

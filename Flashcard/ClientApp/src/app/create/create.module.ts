@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateComponent, TagDialog } from './create.component';
+import { CreateComponent } from './create.component';
+import { TagDialog } from "./tag-dialog.component";
 import { RouterModule } from '@angular/router';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';

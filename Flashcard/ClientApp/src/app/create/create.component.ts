@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
 import { includes, trim } from 'lodash';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { TagDialog } from './tag-dialog.component';
 
 @Component({
     selector: 'fcd-create',
@@ -15,6 +16,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class CreateComponent implements OnInit {
     public Editor = ClassicEditor;
     public allTags: string[] = [];
+    public selectedCardId: number = 0;
     public form: FormGroup = this.fb.group({
         id: 0,
         title: '',
@@ -22,7 +24,9 @@ export class CreateComponent implements OnInit {
         tags: this.fb.control([])
     });
 
-    private selectedCardId: number = 0;
+    public get cardControls() {
+        return this.form.get('cards') as FormArray;
+    }
 
     public addTagDialog(): void {
         const dialogRef = this.dialog.open(TagDialog);
@@ -124,11 +128,3 @@ export class CreateComponent implements OnInit {
     }
 }
 
-@Component({
-    selector: 'tag-dialog',
-    templateUrl: './tag-dialog.component.html',
-})
-export class TagDialog {
-
-    constructor(public dialogRef: MatDialogRef<TagDialog>) {}
-}

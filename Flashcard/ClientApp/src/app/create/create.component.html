@@ -44,7 +44,7 @@
             </mat-card>
           </div>
 
-          <div fxFlex *ngIf="!showSidebar" fxHide fxShow.sm fxShow.lt-sm>
+          <div fxFlex fxHide fxShow.sm fxShow.lt-sm>
             <div fxLayout="row" class="card-select-selector">
               <div fxFlex="25px" class="menu-icon">
                 <mat-icon>menu</mat-icon>
@@ -66,7 +66,7 @@
           </div>
 
           <div fxFlex formArrayName="cards">
-            <div *ngFor="let card of form.get('cards').controls; index as i" [formGroupName]="i" [ngSwitch]="selectedCardId">
+            <div *ngFor="let card of cardControls.controls; index as i" [formGroupName]="i" [ngSwitch]="selectedCardId">
               <mat-card *ngSwitchCase="i">
                 <mat-card-title>{{form.get('title').value}}</mat-card-title>
                 <mat-card-content>

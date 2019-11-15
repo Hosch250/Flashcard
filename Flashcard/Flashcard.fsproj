@@ -36,7 +36,10 @@
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
-    <ItemGroup />
+    <ItemGroup>
+      <None Remove="ClientApp\src\app\shared\models\Flashcard.ts" />
+      <None Remove="ClientApp\src\app\shared\models\FlashcardDeck.ts" />
+    </ItemGroup>
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
