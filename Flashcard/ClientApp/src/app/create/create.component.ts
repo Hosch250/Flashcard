@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit {
         id: 0,
         title: '',
         cards: this.fb.array([]),
-        tags: this.fb.array([])
+        tags: this.fb.control([])
     });
 
     private selectedCardId: number = 0;
@@ -82,7 +82,7 @@ export class CreateComponent implements OnInit {
                     front: card.front,
                     back: card.back
                 }))),
-                tags: this.fb.array(data.tags)
+                tags: this.fb.control(data.tags)
             });
             this.allTags = data.tags;
         });
@@ -100,7 +100,7 @@ export class CreateComponent implements OnInit {
                     front: card.front,
                     back: card.back
                 }))),
-                tags: this.fb.array(deck.tags)
+                tags: this.fb.control(deck.tags)
             });
         } else {
             this.flashcardDeckService
@@ -115,7 +115,7 @@ export class CreateComponent implements OnInit {
                             front: card.front,
                             back: card.back
                         }))),
-                        tags: this.fb.array(data.tags)
+                        tags: this.fb.control(data.tags)
                     });
                     this.allTags = data.tags;
                     this.selectedCardId = 0;
