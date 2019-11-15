@@ -15,13 +15,14 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class CreateComponent implements OnInit {
     public Editor = ClassicEditor;
     public allTags: string[] = [];
-    public selectedCardId: number = 0;
     public form: FormGroup = this.fb.group({
         id: 0,
         title: '',
         cards: this.fb.array([]),
         tags: this.fb.array([])
     });
+
+    private selectedCardId: number = 0;
 
     public addTagDialog(): void {
         const dialogRef = this.dialog.open(TagDialog);
@@ -84,7 +85,6 @@ export class CreateComponent implements OnInit {
                 tags: this.fb.array(data.tags)
             });
             this.allTags = data.tags;
-            this.selectedCardId = 0;
         });
     }
 

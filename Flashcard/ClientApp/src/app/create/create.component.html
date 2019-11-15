@@ -29,7 +29,7 @@
                 <div fxLayout="column">
                   <div fxFlex>
                     <mat-button-toggle-group vertical [value]="selectedCardId" (change)="setSelectedCard($event)">
-                      <mat-button-toggle *ngFor="let card of form.get('cards').value" [value]="card.id" [checked]="card.id === selectedCardId">
+                      <mat-button-toggle *ngFor="let card of form.get('cards').value; index as i" [value]="i" [checked]="i === selectedCardId">
                         {{card.label}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -53,7 +53,7 @@
                 <mat-form-field>
                   <mat-label>Cards</mat-label>
                   <mat-select [value]="selectedCardId" (selectionChange)="setSelectedCard($event)">
-                    <mat-option *ngFor="let card of form.get('cards').value" [value]="card.id">{{card.label}}</mat-option>
+                    <mat-option *ngFor="let card of form.get('cards').value; index as i" [value]="i">{{card.label}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
