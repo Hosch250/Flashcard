@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FlashcardDeckService } from '../shared/services/flashcardDeck.service';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardDeck } from '../shared/models/flashcardDeck';
-import { Flashcard } from '../shared/models/flashcard';
 import { shuffle } from 'lodash';
 
 @Component({

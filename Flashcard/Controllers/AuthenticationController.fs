@@ -5,13 +5,13 @@ open Microsoft.AspNetCore.Mvc
 open Flashcard.Identity
 open Microsoft.AspNetCore.Http
 open Microsoft.AspNetCore.Authorization
+open System
 
 type AuthenticationController (signInManager: SignInManager<AuthenticationUser>, userManager: UserManager<AuthenticationUser>, httpContext: IHttpContextAccessor) =
     inherit ControllerBase()
 
     [<HttpPost; AllowAnonymous>]
-    member __.AuthenticateUser(username: string, password: string, ?returnUrl: string) =
-        let returnUrl = defaultArg returnUrl "/"
+    member __.AuthenticateUser(username: string, [<FromBody>] password: string) =
         async {
             let! result = signInManager.PasswordSignInAsync(username, password, false, true) |> Async.AwaitTask
             match result with
@@ -26,12 +26,12 @@ type AuthenticationController (signInManager: SignInManager<AuthenticationUser>,
                 cookie.Secure <- true
 
                 httpContext.HttpContext.Response.Cookies.Append("LockoutTime", lockoutTime.ToString(), cookie);
-                return new RedirectResult("/Login?ReturnUrl=" + returnUrl)
+                return new RedirectResult("/Login")
             | result when not result.Succeeded ->
-                return new RedirectResult("/Login?ReturnUrl=" + returnUrl)
+                return new RedirectResult("/Login")
             | _ ->
                 httpContext.HttpContext.Response.Cookies.Delete("LockoutTime")
-                return new RedirectResult(returnUrl)
+                return new RedirectResult("/")
         }
     
     [<HttpGet>]

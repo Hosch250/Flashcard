@@ -15,6 +15,10 @@ const routes: Routes = [
         loadChildren: () => import('./deck-viewer/deck-viewer.module').then(m => m.DeckViewerModule)
     },
     {
+        path: 'login',
+        loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    },
+    {
         path: '**',
         loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
     },

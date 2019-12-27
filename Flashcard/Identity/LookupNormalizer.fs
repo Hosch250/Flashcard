@@ -3,6 +3,7 @@
 open Microsoft.AspNetCore.Identity
 open Microsoft.AspNetCore.Authentication.Cookies
 open System
+open System.Linq
 open System.Security.Claims
 open System.Threading.Tasks
 open MongoDB.Driver
