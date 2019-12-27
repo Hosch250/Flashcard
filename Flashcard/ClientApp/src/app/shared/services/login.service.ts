@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,8 @@ export class LoginService {
   constructor(private readonly http: HttpClient) { }
 
   login(username: string, password: string): Observable<void> {
-    return this.http.post<void>(`/Authentication/AuthenticateUser?username=${username}`, {
+    return this.http.post<void>(`/Authentication/AuthenticateUser`, {
+      username: username,
       password: password
     });
   }
