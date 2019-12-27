@@ -49,6 +49,7 @@ type FlashcardDeckController (configuration : IConfiguration) =
 
     [<HttpGet>]
     member __.GetAllDecks(category : string) : FlashcardDeck[] =
+        let x = BCrypt.Net.BCrypt.HashPassword("test")
         let client = new MongoClient(configuration.GetConnectionString("Database"))
         let database = client.GetDatabase("Flashcards")
         let collection = database.GetCollection<FlashcardDeck>("Decks")

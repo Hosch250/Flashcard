@@ -8,6 +8,9 @@ open System.Threading.Tasks
 open MongoDB.Driver
 open Microsoft.Extensions.Configuration
 
+type Role() =
+    member val roleId: Guid = Guid.Empty with get, set
+
 type AuthenticationUser() =
     inherit IdentityUser()
 
@@ -187,3 +190,38 @@ type UserStore(configuration : IConfiguration) =
             let result = collection.FindOneAndUpdateAsync(filterStatement, updateStatement, options, cancellationToken) |> Async.AwaitTask
 
             Task.CompletedTask
+
+type RoleStore() =
+    interface IRoleStore<IdentityRole> with
+        member this.CreateAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.DeleteAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.FindByIdAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.FindByNameAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.GetNormalizedRoleNameAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.GetRoleIdAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.GetRoleNameAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.SetNormalizedRoleNameAsync(role, name, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.SetRoleNameAsync(role, name, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.UpdateAsync(role, cancellationToken) =
+            raise (NotImplementedException())
+
+        member this.Dispose() =
+            raise (NotImplementedException())
