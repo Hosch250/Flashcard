@@ -5,6 +5,7 @@ open Microsoft.Extensions.Configuration
 open FlashcardTypes
 open MongoDB.Driver
 open System.Linq
+open Microsoft.AspNetCore.Authorization
 
 type FlashcardDeckController (configuration : IConfiguration) =
     inherit ControllerBase()
@@ -39,7 +40,7 @@ type FlashcardDeckController (configuration : IConfiguration) =
 
         flashcardDeck
 
-    [<HttpGet>]
+    [<HttpGet; AllowAnonymous>]
     member __.GetDeck(id : int) : FlashcardDeck =
         let client = new MongoClient(configuration.GetConnectionString("Database"))
         let database = client.GetDatabase("Flashcards")
@@ -47,7 +48,7 @@ type FlashcardDeckController (configuration : IConfiguration) =
 
         collection.Find(Builders<FlashcardDeck>.Filter.Eq((fun deck -> deck.Id), id)).Single()
 
-    [<HttpGet>]
+    [<HttpGet; AllowAnonymous>]
     member __.GetAllDecks(category : string) : FlashcardDeck[] =
         let x = BCrypt.Net.BCrypt.HashPassword("test")
         let client = new MongoClient(configuration.GetConnectionString("Database"))
@@ -63,7 +64,7 @@ type FlashcardDeckController (configuration : IConfiguration) =
         collection.Find(filter).ToList()
         |> Seq.toArray
 
-    [<HttpGet>]
+    [<HttpGet; AllowAnonymous>]
     member __.GetAllCategories() : string[] =
         let client = new MongoClient(configuration.GetConnectionString("Database"))
         let database = client.GetDatabase("Flashcards")

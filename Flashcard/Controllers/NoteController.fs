@@ -4,11 +4,12 @@ open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Configuration
 open FlashcardTypes
 open MongoDB.Driver
+open Microsoft.AspNetCore.Authorization
 
 type NoteController (configuration : IConfiguration) =
     inherit ControllerBase()
 
-    [<HttpGet>]
+    [<HttpGet; AllowAnonymous>]
     member __.GetNotes(deckId : int) : Note[] =
         let client = new MongoClient(configuration.GetConnectionString("Database"))
         let database = client.GetDatabase("Flashcards")
