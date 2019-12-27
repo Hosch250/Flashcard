@@ -5,7 +5,9 @@
       <button mat-button [routerLink]="['']">Flashcard</button>
       <button mat-button [routerLink]="['/create']">Create</button>
       <span class="fill-space"></span>
-      <button mat-button [routerLink]="['/login']">Login</button>
+      <button mat-button [routerLink]="['/login']" *ngIf="!cookieExists('username')">Login</button>
+      <span *ngIf="!!cookieExists('username')">{{username()}}</span>
+      <button mat-button (click)="logout()" *ngIf="!!cookieExists('username')">Logout</button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </div>

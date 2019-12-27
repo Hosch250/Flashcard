@@ -21,7 +21,7 @@ type NoteController (configuration : IConfiguration) =
         |> Seq.toArray
         
     [<HttpPost>]
-    member __.CreateNote(deckId : int, content : string) : Note =
+    member __.CreateNote(deckId: int, content: string, createdBy: string) : Note =
         let client = new MongoClient(configuration.GetConnectionString("Database"))
         let database = client.GetDatabase("Flashcards")
         let collection = database.GetCollection<Note>("Notes")
@@ -34,7 +34,7 @@ type NoteController (configuration : IConfiguration) =
                     .SortByDescending(fun i -> (i.Id :> obj))
                     .FirstOrDefault().Id + 1
 
-        let note = new Note(id, deckId, content)
+        let note = new Note(id, deckId, content, createdBy)
             
         async {
             collection.InsertOneAsync(note) |> ignore

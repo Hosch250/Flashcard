@@ -1,5 +1,5 @@
 <div *ngFor="let note of notes">
-  <span class="bold">Joe Blow</span>
+  <span class="bold">{{note.createdBy}}</span>
   <span class="pull-right">{{note.createdOn | date}}</span>
   <p class="content">
     {{note.content}}

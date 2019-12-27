@@ -16,8 +16,9 @@ type FlashcardDeck(id, title, cards, tags) =
     member val Tags: string[] = tags with get,set
     new() = FlashcardDeck(0, "", [||], [||]);
 
-type Note(id, deckId, content) =
+type Note(id, deckId, content, createdBy) =
     member val Id: int = id with get,set
     member val DeckId: int = deckId with get,set
     member val Content: string = content with get,set
-    member val CreatedOn: DateTime = DateTime.Now with get,set
+    member val CreatedBy: string = createdBy with get,set
+    member val CreatedOn: DateTime = DateTime.UtcNow with get,set

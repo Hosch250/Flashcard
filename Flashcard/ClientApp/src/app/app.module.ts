@@ -8,10 +8,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginService } from './shared/services/login.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
-    AppComponent
+        AppComponent
     ],
     imports: [
         BrowserModule,
@@ -20,9 +22,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
         MatToolbarModule,
         AppRoutingModule,
         NoopAnimationsModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        HttpClientModule
     ],
-    providers: [],
+    providers: [LoginService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

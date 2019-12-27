@@ -30,17 +30,21 @@ type AuthenticationController (signInManager: SignInManager<AuthenticationUser>,
                 cookie.Secure <- true
 
                 httpContext.HttpContext.Response.Cookies.Append("LockoutTime", lockoutTime.ToString(), cookie);
+
                 return new RedirectResult("/Login")
             | result when not result.Succeeded ->
                 return new RedirectResult("/Login")
             | _ ->
                 httpContext.HttpContext.Response.Cookies.Delete("LockoutTime")
+                httpContext.HttpContext.Response.Cookies.Append("username", user.Username)
+
                 return new RedirectResult("/")
         }
     
     [<HttpGet>]
     member __.SignOut() =
         async {
+            httpContext.HttpContext.Response.Cookies.Delete("username")
             do! Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync(httpContext.HttpContext, "Identity.Application") |> Async.AwaitTask
             return new RedirectResult("/Login")
         }

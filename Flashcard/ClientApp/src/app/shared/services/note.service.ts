@@ -13,7 +13,7 @@ export class NoteService {
         return this.http.get<Note[]>(`/Note/getNotes?deckId=${deckId}`);
     }
 
-    create(deckId: number, content: string): Observable<Note> {
-        return this.http.post<Note>(`/Note/createNote?deckId=${deckId}&content=${content}`, null);
+    create(deckId: number, content: string, createdBy: string): Observable<Note> {
+        return this.http.post<Note>(`/Note/createNote?deckId=${deckId}&content=${content}&createdBy=${createdBy}`, null);
     }
 }

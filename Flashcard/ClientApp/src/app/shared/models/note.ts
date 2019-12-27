@@ -3,4 +3,5 @@ export interface Note {
     deckId: number;
     content: string;
     createdOn: Date;
+    createdBy: string;
 }
