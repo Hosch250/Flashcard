@@ -4,14 +4,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { LoginService } from '../shared/services/login.service';
-import { LoginComponent } from './login.component';
+import { CreateUserComponent } from './create-user.component';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [CreateUserComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -21,9 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms'
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: '', component: LoginComponent }
+      { path: '', component: CreateUserComponent }
     ])
   ],
   providers: [LoginService],
 })
-export class LoginModule { }
+export class CreateUserModule { }

@@ -95,7 +95,7 @@ type UserStore(configuration : IConfiguration) =
             let database = client.GetDatabase("Flashcards")
             let collection = database.GetCollection<AuthenticationUser>("User")
 
-            Task.FromResult(collection.Find((fun f -> f.UserName = name)).Single())
+            Task.FromResult(collection.Find((fun f -> f.UserName = name)).SingleOrDefault())
 
         member this.GetNormalizedUserNameAsync(user, cancellationToken) =
             Task.FromResult(user.UserName)
@@ -126,7 +126,8 @@ type UserStore(configuration : IConfiguration) =
             Task.FromResult(String.IsNullOrEmpty(user.PasswordHash))
 
         member this.SetPasswordHashAsync(user, hash, cancellationToken) =
-            raise (NotImplementedException())
+            user.PasswordHash <- hash
+            Task.CompletedTask
 
     interface IUserLockoutStore<AuthenticationUser> with
         member this.GetAccessFailedCountAsync(user, cancellationToken) =

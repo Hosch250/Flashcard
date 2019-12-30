@@ -40,6 +40,17 @@ type AuthenticationController (signInManager: SignInManager<AuthenticationUser>,
 
                 return new RedirectResult("/")
         }
+
+    [<HttpPost; AllowAnonymous>]
+    member __.Signup([<FromBody>] user: UserAuthentication) =
+        async {
+            let authUser = new AuthenticationUser()
+            authUser.UserName <- user.Username
+
+            let! result = signInManager.UserManager.CreateAsync(authUser, user.Password) |> Async.AwaitTask
+
+            return new RedirectResult("/")
+        }
     
     [<HttpGet>]
     member __.SignOut() =
