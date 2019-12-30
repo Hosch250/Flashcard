@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Identity\LookupNormalizer.fs" />
+    <Compile Include="Identity\Identity.fs" />
     <Compile Include="Flashcard.fs" />
     <Compile Include="Controllers\AuthenticationController.fs" />
     <Compile Include="Controllers\FlashcardDeckController.fs" />
