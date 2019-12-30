@@ -32,4 +32,4 @@
 </section>
 <h2 class="notes-header">Notes</h2>
 <fcd-note-viewer [deckId]="flashcardDeck?.id"></fcd-note-viewer>
-<fcd-note-creator [deckId]="flashcardDeck?.id"></fcd-note-creator>
+<fcd-note-creator [deckId]="flashcardDeck?.id" [username]="getCookie('username')"></fcd-note-creator>
