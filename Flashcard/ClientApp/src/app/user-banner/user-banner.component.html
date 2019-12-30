@@ -1,0 +1,5 @@
+<button mat-button [routerLink]="['/login']" *ngIf="!cookieExists('username')">Login</button>
+<button mat-button [matMenuTriggerFor]="beforeMenu" *ngIf="!!cookieExists('username')">{{username()}}</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>
