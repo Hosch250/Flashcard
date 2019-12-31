@@ -1,20 +1,39 @@
 <section>
-  <form [formGroup]="form" (ngSubmit)="signup()">
-    <mat-card>
-      <mat-card-content>
-        <mat-form-field>
-          <input matInput placeholder="Username" formControlName="username" />
-        </mat-form-field>
-        <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password" />
-        </mat-form-field>
-        <mat-form-field>
-          <input type="password" matInput placeholder="Password Confirmation" formControlName="passwordConfirmation" />
-        </mat-form-field>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">Signup</button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
+    <form [formGroup]="form" (ngSubmit)="signup()">
+        <mat-card>
+            <mat-card-content>
+                <mat-form-field>
+                    <input matInput placeholder="Username" formControlName="username" />
+                    <mat-error>
+                        <div class="error" *ngIf="form.get('password').getError('required')">
+                            Username is required
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Password" formControlName="password" />
+                    <mat-error>
+                        <div class="error" *ngIf="form.get('password').getError('required')">
+                            Password is required
+                        </div>
+                        <div class="error" *ngIf="form.get('password').getError('pattern')">
+                            Password length must be at least 6 characters <br />
+                            Password must have uppercase, lowercase, digit, and special characters <br />
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Password Confirmation" formControlName="passwordConfirmation" />
+                    <mat-error>
+                        <div class="error" *ngIf="form.get('passwordConfirmation').getError('mismatch')">
+                            Passwords do not match
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" type="submit">Signup</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
 </section>

@@ -24,26 +24,26 @@ type Startup private () =
     member this.ConfigureServices(services: IServiceCollection) =
         
         services.AddIdentity<AuthenticationUser, IdentityRole>((fun options ->
-            options.Lockout.AllowedForNewUsers <- true;
-            options.Lockout.MaxFailedAccessAttempts <- 5;
-            options.Lockout.DefaultLockoutTimeSpan <- new TimeSpan(0, 5, 0);
+            options.Lockout.AllowedForNewUsers <- true
+            options.Lockout.MaxFailedAccessAttempts <- 5
+            options.Lockout.DefaultLockoutTimeSpan <- new TimeSpan(0, 5, 0)
 
-            options.ClaimsIdentity.UserNameClaimType <- ClaimTypes.Name;
-            options.ClaimsIdentity.UserIdClaimType <- ClaimTypes.Sid;
-            options.ClaimsIdentity.RoleClaimType <- ClaimTypes.Role;
+            options.ClaimsIdentity.UserNameClaimType <- ClaimTypes.Name
+            options.ClaimsIdentity.UserIdClaimType <- ClaimTypes.Sid
+            options.ClaimsIdentity.RoleClaimType <- ClaimTypes.Role
         )) |> ignore
         services.ConfigureApplicationCookie((fun options ->
-            options.Cookie.Name <- ".auth";
-            options.Cookie.HttpOnly <- true;
-            options.Cookie.SameSite <- SameSiteMode.Strict;
-            options.Cookie.IsEssential <- true;
-            options.LoginPath <- new PathString("/Login");
-            options.AccessDeniedPath <- new PathString("/Login");
-            options.ForwardAuthenticate <- "Identity.Application";
-            options.ForwardChallenge <- "Identity.Application";
-            options.ForwardForbid <- "Identity.Application";
-            options.SlidingExpiration <- true;
-            options.ExpireTimeSpan <- new TimeSpan(0, 30, 0);
+            options.Cookie.Name <- ".auth"
+            options.Cookie.HttpOnly <- true
+            options.Cookie.SameSite <- SameSiteMode.Strict
+            options.Cookie.IsEssential <- true
+            options.LoginPath <- new PathString("/Login")
+            options.AccessDeniedPath <- new PathString("/Login")
+            options.ForwardAuthenticate <- "Identity.Application"
+            options.ForwardChallenge <- "Identity.Application"
+            options.ForwardForbid <- "Identity.Application"
+            options.SlidingExpiration <- true
+            options.ExpireTimeSpan <- new TimeSpan(0, 30, 0)
         )) |> ignore
 
         // Add framework services.
