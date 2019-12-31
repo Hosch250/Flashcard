@@ -1,24 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../shared/services/login.service';
 import { Router } from '@angular/router';
-
-export function checkMatchValidator(field1: string, field2: string) {
-    return function (control) {
-
-        if (!control || !control.parent) {
-            return null;
-        }
-
-        let field1Value = control.parent.get(field1).value;
-        let field2Value = control.parent.get(field2).value;
-
-        if (field1Value !== '' && field1Value !== field2Value) {
-            return { 'mismatch': `Field value mismatch` }
-        }
-        return null;
-    }
-}
 
 @Component({
     selector: 'fcd-create-user',
@@ -26,6 +9,23 @@ export function checkMatchValidator(field1: string, field2: string) {
     styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent {
+    
+    private checkMatchValidator(field1: string, field2: string) {
+        return function (control) {
+
+            if (!control || !control.parent) {
+                return null;
+            }
+
+            let field1Value = control.parent.get(field1).value;
+            let field2Value = control.parent.get(field2).value;
+
+            if (field1Value !== '' && field1Value !== field2Value) {
+                return { 'mismatch': `Field value mismatch` }
+            }
+            return null;
+        }
+    }
 
     public form: FormGroup = this.fb.group({
         username: this.fb.control('', Validators.required),
@@ -38,7 +38,7 @@ export class CreateUserComponent {
                 Validators.pattern(/[A-Z]/g),
                 Validators.pattern(/\W/g)
             ], updateOn: 'blur' }),
-        passwordConfirmation: this.fb.control('', { validators: [checkMatchValidator('password', 'passwordConfirmation')], updateOn: 'blur' })
+        passwordConfirmation: this.fb.control('', { validators: [this.checkMatchValidator('password', 'passwordConfirmation')], updateOn: 'blur' })
     });
 
     constructor(private readonly fb: FormBuilder,
