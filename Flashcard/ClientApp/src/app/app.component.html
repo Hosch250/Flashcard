@@ -1,13 +1,14 @@
 <div fxLayout="row">
   <div fxFlex="15%"></div>
   <div fxFlex>
-    <mat-toolbar>
-      <button mat-button [routerLink]="['']">Flashcard</button>
-      <button mat-button [routerLink]="['/create']">Create</button>
-      <span class="fill-space"></span>
-      <fcd-user-banner></fcd-user-banner>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
+      <mat-toolbar>
+          <button mat-button [routerLink]="['']">Flashcard</button>
+          <button mat-button [routerLink]="['/create']">Create</button>
+          <span class="fill-space"></span>
+          <fcd-user-banner></fcd-user-banner>
+      </mat-toolbar>
+      <fcd-help-module></fcd-help-module>
+      <router-outlet></router-outlet>
   </div>
   <div fxFlex="15%"></div>
 </div>

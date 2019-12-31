@@ -70,15 +70,17 @@
               <mat-card *ngSwitchCase="i">
                 <mat-card-title>{{form.get('title').value}}</mat-card-title>
                 <mat-card-content>
-                  <mat-form-field>
-                    <input matInput placeholder="Card Label" formControlName="label" />
-                  </mat-form-field>
-                  <label for="card-front">Card Front</label>
-                  <ckeditor [editor]="Editor" formControlName="front"></ckeditor>
-                  <ckeditor [editor]="Editor" formControlName="back"></ckeditor>
-                  <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()" type="button">
-                    <mat-icon>delete_outline</mat-icon> Delete Card
-                  </button>
+                    <mat-form-field>
+                        <input matInput placeholder="Card Label" formControlName="label" />
+                    </mat-form-field>
+                    <label for="{{ 'card-front' + i }}">Card Front</label>
+                    <ckeditor [editor]="Editor" formControlName="front" id="{{ 'card-front' + i }}"></ckeditor>
+
+                    <label for="{{ 'card-back' + i }}">Card Back</label>
+                    <ckeditor [editor]="Editor" formControlName="back" id="{{ 'card-back' + i }}"></ckeditor>
+                    <button mat-raised-button color="primary" id="delete-card" (click)="deleteCard()" type="button">
+                        <mat-icon>delete_outline</mat-icon> Delete Card
+                    </button>
                 </mat-card-content>
               </mat-card>
             </div>
